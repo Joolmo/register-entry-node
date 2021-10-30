@@ -2,11 +2,12 @@
   "name": "register-entry-node",
   "version": "1.0.0",
   "description": "register employees app",
-  "main": "electron-start.js",
   "author": "Juan.Gallego/Jose.Olmos/Airam.Perez/Alejandro.Peña",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "yarn build && electron ./dist/electron-start.js",
+    "build": "./node_modules/.bin/tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/Joolmo/register-entry-node#readme",
   "devDependencies": {
-    "electron": "^15.3.0"
+    "@types/electron": "^1.6.10",
+    "electron": "^15.3.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "xlsx": "^0.17.3"
   }
 }
