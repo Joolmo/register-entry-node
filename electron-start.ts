@@ -1,4 +1,6 @@
 import { app, BrowserWindow } from 'electron';
+import { PersonSheetRepository } from './Data/Repositories/PersonSheetRepository';
+import { Person } from './Domain/Entities/Person';
 
 
 export default class Main {
@@ -34,5 +36,15 @@ export default class Main {
         Main.application.on('ready', Main.onReady);
     }
 }
+
+const repo = new PersonSheetRepository();
+const dto: Person = {
+    ID: "123456789",
+    Name: "Juan",
+    Surname: "Gallego",
+    Employee: true
+}
+
+repo.Create(dto)
 
 Main.main(app, BrowserWindow);
