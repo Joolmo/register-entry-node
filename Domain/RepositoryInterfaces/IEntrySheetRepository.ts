@@ -1,4 +1,4 @@
-import { Entry } from "../Entitites/Entry";
+import { Entry } from "../Entities/Entry";
 
 export type IEntryRepository = {
     Create(entry: Entry): void 

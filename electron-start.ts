@@ -1,6 +1,10 @@
 import { app, BrowserWindow } from 'electron';
+import { IPersonService } from './Business/PersonManagement/Services/IPersonService';
+import { PersonService } from './Business/PersonManagement/Services/PersonService';
 import { PersonSheetRepository } from './Data/Repositories/PersonSheetRepository';
 import { Person } from './Domain/Entities/Person';
+import { IPersonRepository } from './Domain/RepositoryInterfaces/IPersonRepository';
+import { Container } from './Helpers/ContainerIoC';
 
 
 export default class Main {
@@ -37,14 +41,19 @@ export default class Main {
     }
 }
 
-const repo = new PersonSheetRepository();
-const dto: Person = {
-    ID: "123456789",
-    Name: "Juan",
-    Surname: "Gallego",
-    Employee: true
+type Types = {
+    IPersonRepository: IPersonRepository,
+    IPersonService: IPersonService
 }
 
-repo.Create(dto)
+const container = new Container<Types>()
+container.service("IPersonRepository", _ => new PersonSheetRepository())
+container.service("IPersonService", c => new PersonService(c.get("IPersonRepository")))
+const service = container.get("IPersonService");
+
+service.Register({
+    Id: "ee",
+    Name: "sd"
+});
 
 Main.main(app, BrowserWindow);

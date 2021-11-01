@@ -4,10 +4,11 @@
   "description": "register employees app",
   "author": "Juan.Gallego/Jose.Olmos/Airam.Perez/Alejandro.Peña",
   "license": "MIT",
+  "homepage": "https://github.com/Joolmo/register-entry-node#readme",
   "scripts": {
     "start": "yarn build && electron ./dist/electron-start.js",
     "build": "./node_modules/.bin/tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,10 @@
   "bugs": {
     "url": "https://github.com/Joolmo/register-entry-node/issues"
   },
-  "homepage": "https://github.com/Joolmo/register-entry-node#readme",
   "devDependencies": {
     "@types/electron": "^1.6.10",
     "electron": "^15.3.0",
+    "mocha": "^9.1.3",
     "typescript": "^4.4.4"
   },
   "dependencies": {
