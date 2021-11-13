@@ -1,2 +1,3 @@
 
-export {RequestRegisterPersonDto} from "./RequestRegisterPersonDto";
+export { RequestRegisterPersonDto } from "./RequestRegisterPersonDto";
+export { RequestLoginPersonDto } from "./RequestLoginPersonDto";
