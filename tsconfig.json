@@ -1,7 +1,8 @@
 { 
     "compilerOptions": {
-      "target": "es5",
+      "target": "esNext",
       "module": "commonjs",
+      "types": ["mocha"],
       "moduleResolution": "node",
       "sourceMap": true,
       "emitDecoratorMetadata": true,
