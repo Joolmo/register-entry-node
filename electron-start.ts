@@ -40,8 +40,8 @@ export default class Main {
 const repo = new PersonSheetRepository();
 const dto: Person = {
     ID: "123456789",
-    Name: "Juan",
-    Surname: "Gallego",
+    Name: "Victor",
+    Surname: "Menchero",
     Employee: true
 }
 
