@@ -1,5 +1,5 @@
 import { promises as Fs } from 'fs';
-import { IBaseDao } from "../DaoInterfaces/IBaseDao";
+import { IBaseDao, QueryObject } from "../DaoInterfaces/IBaseDao";
 import xlsx = require('xlsx');
 
 export class BaseXlsxDao<T extends object> implements IBaseDao<T> {
@@ -31,7 +31,23 @@ export class BaseXlsxDao<T extends object> implements IBaseDao<T> {
         const wb = await this.openWB();
         const sheet = wb.Sheets[wb.SheetNames[0]];
 
-        const people = xlsx.utils.sheet_to_json<T>(sheet)
-        return people
+        const entity = xlsx.utils.sheet_to_json<T>(sheet)
+        return entity;
+    }
+
+    public async where(queryObject: QueryObject<T>) {
+        const wb = await this.openWB();
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+
+        const entity = xlsx.utils.sheet_to_json<T>(sheet)
+        return entity.filter(queryObject.where)
+    }
+
+    public async find(queryObject: QueryObject<T>) {
+        const wb = await this.openWB();
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+
+        const entity = xlsx.utils.sheet_to_json<T>(sheet)
+        return entity.find(queryObject.where)
     }
 }

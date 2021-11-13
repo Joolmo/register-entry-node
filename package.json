@@ -8,7 +8,9 @@
   "scripts": {
     "start": "yarn build && electron ./dist/electron-start.js",
     "build": "./node_modules/.bin/tsc",
-    "test": "mocha ./dist/nodeBE/Test --timeout 10000"
+    "clean": "powershell rm -r ./dist",
+    "copyTestFiles": "powershell cp ./NodeBE/test/test.xlsx ./dist/NodeBE/test/test.xlsx",
+    "test": "yarn clean && yarn build && yarn copyTestFiles && mocha ./dist/nodeBE/Test --timeout 10000"
   },
   "repository": {
     "type": "git",
