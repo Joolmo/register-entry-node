@@ -5,9 +5,8 @@
   "author": "Juan.Gallego/Jose.Olmos/Airam.Perez/Alejandro.Peña",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build && electron ./dist/electron-start.js",
-    "build": "./node_modules/.bin/tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "build": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,19 @@
   },
   "dependencies": {
     "xlsx": "^0.17.3"
-  }
+  },
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
