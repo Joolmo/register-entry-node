@@ -51,7 +51,7 @@ export class Container<ContainerDef extends AnyObject> {
             get: () => {
                 // It is not needed to check the nullability of this._dependencies[name] as it is always created above
                 switch(this._dependencies[name].storeType) {
-                    case StoreTypes.singleton: return this.singeltonGetter(name);
+                    case StoreTypes.singleton:  return this.singeltonGetter(name);
                     case StoreTypes.configuration: return this.configGetter(name);
                     case StoreTypes.transient: return this.transientGetter(name);
                 }
