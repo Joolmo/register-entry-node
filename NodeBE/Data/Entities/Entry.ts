@@ -1,5 +1,5 @@
 export type Entry = {
-    ID: string,
+    Id: string,
     Name: string,
     Surname: string,
     Employee: string,

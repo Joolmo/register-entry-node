@@ -1,0 +1,2 @@
+
+export {RequestRegisterPersonDto} from "./RequestRegisterPersonDto";

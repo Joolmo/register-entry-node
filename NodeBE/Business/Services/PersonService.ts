@@ -1,5 +1,5 @@
 import { IEntryDao } from "../../Data/DaoInterfaces/IEntryDao";
-import { IPersonService } from "../ServiceInterfaces/IPersonService";
+import { IPersonService } from "./IPersonService";
 
 export class PersonService implements IPersonService{
     private entryDao: IEntryDao
@@ -11,10 +11,10 @@ export class PersonService implements IPersonService{
     RegisterPerson(): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    GetPeople(): Promise<void> {
+    GetPersonList(): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    LogPersionEntry(): Promise<void> {
+    LogPerson(): Promise<void> {
         throw new Error("Method not implemented.");
     }
 }

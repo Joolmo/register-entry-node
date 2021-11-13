@@ -1,4 +1,4 @@
-import { BaseXlsxDao } from "../Data/Daos/BaseXlsxDao"
+import { BaseXlsxDao } from "../Data/Dao/BaseXlsxDao"
 import assert = require('assert');
 
 describe("El puto xlslx test", () => {

@@ -1,8 +1,8 @@
-import { IPersonService } from "./Business/ServiceInterfaces/IPersonService"
+import { IPersonService } from "./Business/Services/IPersonService"
 import { PersonService } from "./Business/Services/PersonService"
 import { DaoConfiguration } from "./Data/Configuration/DaoConfiguration"
 import { IEntryDao } from "./Data/DaoInterfaces/IEntryDao"
-import { EntryXlsxDao } from "./Data/Daos/EntryXlsxDao"
+import { EntryXlsxDao } from "./Data/Dao/EntryXlsxDao"
 import { Container } from "./Helpers/IoC"
 import { promises as Fs} from 'fs'
 
@@ -28,7 +28,7 @@ const setUpDependencies = async (container: Container<InjectionsList>) => {
 const setUpListeners = (ipcMain: Electron.IpcMain, container: Container<InjectionsList>) => {
     ipcMain.handle("RegisterUserRequest", async (event, args) => {
         const personService = container.dependencies.IPersonService;
-        await personService.RegisterPerson(); 
+        // await personService.RegisterPerson();
         return true;
     })
 }
