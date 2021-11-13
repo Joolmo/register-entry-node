@@ -4,9 +4,11 @@
   "description": "register employees app",
   "author": "Juan.Gallego/Jose.Olmos/Airam.Perez/Alejandro.Peña",
   "license": "MIT",
+  "homepage": "https://github.com/Joolmo/register-entry-node#readme",
   "scripts": {
-    "start": "electron .",
-    "build": "./node_modules/.bin/tsc"
+    "start": "yarn build && electron ./dist/electron-start.js",
+    "build": "./node_modules/.bin/tsc",
+    "test": "mocha ./dist/nodeBE/Test --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -15,27 +17,15 @@
   "bugs": {
     "url": "https://github.com/Joolmo/register-entry-node/issues"
   },
-  "homepage": "https://github.com/Joolmo/register-entry-node#readme",
   "devDependencies": {
     "@types/electron": "^1.6.10",
+    "@types/mocha": "^9.0.0",
     "electron": "^15.3.0",
+    "mocha": "^9.1.3",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "acron": "^1.0.5",
     "xlsx": "^0.17.3"
-  },
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }
