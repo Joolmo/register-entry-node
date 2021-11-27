@@ -7,7 +7,7 @@ import path = require('path');
 export class PersonXlsxDao extends BaseXlsxDao<Person> implements IPersonDao {
     public constructor(config: DaoConfiguration) {
         const baseDir = config.basePath;
-        const fileName = config.entitiesFile;
+        const fileName = config.peopleFile;
         super(path.join(baseDir, fileName))
     }
 }

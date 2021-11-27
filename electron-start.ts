@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import { setUpNodeBe } from './NodeBE/setup';
+const path = require('path');
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
@@ -17,9 +18,19 @@ export default class Main {
     }
 
     private static onReady() {
-        Main.mainWindow = new Main.BrowserWindow({ width: 800, height: 600 });
+        Main.mainWindow = new Main.BrowserWindow({ 
+            width: 800, 
+            height: 600,
+            webPreferences:{
+                nodeIntegration: false,
+                contextIsolation: true,
+                enableRemoteModule: false,
+                preload: path.join(__dirname, "preload.js")
+            }
+        });
         Main.mainWindow
-            .loadURL('file://' + __dirname + '/index.html');
+            .loadURL('http://localhost:3000');
+        Main.mainWindow.webContents.openDevTools();
         Main.mainWindow.on('closed', Main.onClose);
     }
 

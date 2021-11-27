@@ -14,7 +14,8 @@ export class ContainerWithHandlers<T extends AnyObject> extends Container<T> {
         endpoints.forEach(endPoint => {
             ipcMain.handle(`${basePath}/${endPoint.path}`, (_, ...args) => {
                 const handler = this.dependencies[name]
-                return handler[endPoint.methodName](args)
+                console.log(args);
+                return handler[endPoint.methodName](args[0])
             })
         })
     }

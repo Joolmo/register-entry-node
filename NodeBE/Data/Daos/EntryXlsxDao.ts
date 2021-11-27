@@ -6,8 +6,8 @@ import path = require('path');
 
 export class EntryXlsxDao extends BaseXlsxDao<Entry> implements IEntryDao {
     public constructor(config: DaoConfiguration) {
-        const baseDir = config.basePath
-        const fileName = config.entitiesFile
+        const baseDir = config.basePath;
+        const fileName = config.entriesFile;
         super(path.join(baseDir, fileName))
     }
 }
