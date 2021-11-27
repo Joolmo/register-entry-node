@@ -5,11 +5,14 @@ import { IEntryDao } from "./Data/DaoInterfaces/IEntryDao"
 import { EntryXlsxDao } from "./Data/Daos/EntryXlsxDao"
 import { Container } from "./Helpers/IoC"
 import { promises as Fs} from 'fs'
+import { ContainerWithHandlers } from "./Helpers"
+import { PersonHandler } from "./Business/Listeners/PersonHandler"
 
 type InjectionsList = {
     IEntryDao: IEntryDao,
     DaoConfiguration: DaoConfiguration,
     IPersonService: IPersonService
+    PersonHandler: PersonHandler
 }
 
 const setUpConfiguration = () => {
@@ -25,16 +28,12 @@ const setUpDependencies = async (container: Container<InjectionsList>) => {
     container.Register("DaoConfiguration", _ => config).asConfiguration()
 }
 
-const setUpListeners = (ipcMain: Electron.IpcMain, container: Container<InjectionsList>) => {
-    ipcMain.handle("RegisterUserRequest", async (event, args) => {
-        const personService = container.dependencies.IPersonService;
-        await personService.RegisterPerson(); 
-        return true;
-    })
+const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
+    container.RegisterHandler("PersonHandler", c => new PersonHandler(c.IPersonService))
 }
 
-const container = new Container<InjectionsList>();
-export const setUpNodeBe = (ipcMain: Electron.IpcMain) => {
+const container = new ContainerWithHandlers<InjectionsList>();
+export const setUpNodeBe = () => {
     setUpDependencies(container);
-    setUpListeners(ipcMain, container)
+    setUpHandlers(container)
 } 

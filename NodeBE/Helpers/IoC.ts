@@ -1,12 +1,13 @@
 /* Custom, simple, DI inyection for IoC */
 
-import { AnyObject, StoreTypes, Dependencies } from './IoCTypes'
+import { AnyObject, StoreTypes, Dependencies } from '.'
+
 
 export class Container<ContainerDef extends AnyObject> {
     // Private store of dependencies configurations
-    private readonly _dependencies: Dependencies<ContainerDef>
+    protected readonly _dependencies: Dependencies<ContainerDef>
     // If not specified the store will be this by default
-    private readonly defaultStoreType = StoreTypes.singleton;
+    protected readonly defaultStoreType = StoreTypes.singleton;
     // Public object containing getters for the dependencies
     public readonly dependencies: Partial<ContainerDef>
 
@@ -15,11 +16,11 @@ export class Container<ContainerDef extends AnyObject> {
         this.dependencies = {}
     }
 
-    private updateDependencyType(name: keyof ContainerDef, type: StoreTypes) {
+    protected updateDependencyType(name: keyof ContainerDef, type: StoreTypes) {
         this._dependencies[name].storeType = type
     }
 
-    private singeltonGetter(name: keyof ContainerDef) {
+    protected singeltonGetter(name: keyof ContainerDef) {
         // Get sinlgeton or create it once if it does not exist
         if(!this._dependencies[name].instance) {
             this._dependencies[name].instance = this._dependencies[name].factoryFunc();
@@ -27,7 +28,7 @@ export class Container<ContainerDef extends AnyObject> {
         return this._dependencies[name].instance   
     }
     
-    private configGetter(name: keyof ContainerDef) {
+    protected configGetter(name: keyof ContainerDef) {
         // Get configuration or create it once if it does not exist and don't let anyone modify it
         if(!this._dependencies[name].instance) {
             this._dependencies[name].instance = Object.freeze(this._dependencies[name].factoryFunc());
@@ -35,12 +36,12 @@ export class Container<ContainerDef extends AnyObject> {
         return this._dependencies[name].instance   
     }
 
-    private transientGetter(name: keyof ContainerDef) {
+    protected transientGetter(name: keyof ContainerDef) {
         // Always create a new instance that will be dellocated by the GC afterawards
         return this._dependencies[name].factoryFunc()
     }
 
-    Register<Key extends keyof ContainerDef>(name: Key, factoryFunc: (dependencys: Partial<ContainerDef>) => ContainerDef[Key]) {
+    public Register<Key extends keyof ContainerDef>(name: Key, factoryFunc: (dependencies: Partial<ContainerDef>) => ContainerDef[Key]) {
         // Register dependency in dependecy array
         this._dependencies[name] = {
             factoryFunc: () => factoryFunc(this.dependencies),

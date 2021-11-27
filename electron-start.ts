@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import { setUpNodeBe } from './NodeBE/setup';
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
@@ -27,6 +28,7 @@ export default class Main {
         // Electron.BrowserWindow into this function 
         // so this class has no dependencies. This 
         // makes the code easier to write tests for 
+        setUpNodeBe()
         Main.BrowserWindow = browserWindow;
         Main.application = app;
         Main.application.on('window-all-closed', Main.onWindowAllClosed);
