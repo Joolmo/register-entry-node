@@ -24,20 +24,18 @@ const setUpConfiguration = () => {
 }
 
 const setUpDependencies = async (container: Container<InjectionsList>) => {
-    const config = await setUpConfiguration();
-
     container.Register("IPersonService", c => new PersonService(c.IEntryDao, c.IPersonDao)).asTransient();
     container.Register("IEntryDao", c => new EntryXlsxDao(c.DaoConfiguration)).asTransient();
     container.Register("IPersonDao", c => new PersonXlsxDao(c.DaoConfiguration)).asTransient();
-    container.Register("DaoConfiguration", _ => config).asConfiguration();
+    container.Register("DaoConfiguration", _ => ({basePath: "", personsFile: "", entitiesFile: ""})).asConfiguration();
 }
 
 const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
-    container.RegisterHandler("PersonHandler", c => {const x = new PersonHandler(c.IPersonService); console.log(c); return x;})
+    container.RegisterHandler("PersonHandler", c => new PersonHandler(c.IPersonService))
 }
 
 const container = new ContainerWithHandlers<InjectionsList>();
-export const setUpNodeBe = () => {
-    setUpDependencies(container);
+export const setUpNodeBe = async () => {
+    await setUpDependencies(container);
     setUpHandlers(container)
 } 
