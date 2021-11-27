@@ -1,6 +1,6 @@
 /* Custom, simple, DI inyection for IoC */
 
-import { AnyObject, StoreTypes, Dependencies } from '.'
+import { AnyObject , StoreTypes, Dependencies } from './IoCTypes'
 
 
 export class Container<ContainerDef extends AnyObject> {
@@ -55,6 +55,7 @@ export class Container<ContainerDef extends AnyObject> {
                     case StoreTypes.singleton:  return this.singeltonGetter(name);
                     case StoreTypes.configuration: return this.configGetter(name);
                     case StoreTypes.transient: return this.transientGetter(name);
+                    default: throw new Error("Not implemented")
                 }
             },
             configurable: true,

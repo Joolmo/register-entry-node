@@ -33,7 +33,7 @@ const setUpDependencies = async (container: Container<InjectionsList>) => {
 }
 
 const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
-    container.RegisterHandler("PersonHandler", c => new PersonHandler(c.IPersonService))
+    container.RegisterHandler("PersonHandler", c => {const x = new PersonHandler(c.IPersonService); console.log(c); return x;})
 }
 
 const container = new ContainerWithHandlers<InjectionsList>();

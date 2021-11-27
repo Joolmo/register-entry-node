@@ -1,5 +1,6 @@
 import { Handler, IpcMainHandler, Listener } from "../../Helpers";
-import { IPersonService } from "../ServiceInterfaces/IPersonService";
+import { RequestRegisterPersonDto } from "../Dto";
+import { IPersonService } from "../Services/IPersonService";
 
 @Handler("person")
 export class PersonHandler extends IpcMainHandler {
@@ -11,7 +12,7 @@ export class PersonHandler extends IpcMainHandler {
     }
 
     @Listener("register")
-    public RegisterPerson(personDto) {
-        return this.personService.RegisterPerson()
+    public RegisterPerson(personDto: RequestRegisterPersonDto) {
+        return this.personService.RegisterPerson(personDto)
     }
 }
