@@ -20,34 +20,34 @@ export class BaseXlsxDao<T extends object> implements IBaseDao<T> {
         const wb = await this.openWB();
         const sheet = wb.Sheets[wb.SheetNames[0]];
 
-        const people = xlsx.utils.sheet_to_json<T>(sheet)
-        people.push(entry)
+        const entities = xlsx.utils.sheet_to_json<T>(sheet)
+        entities.push(entry)
 
-        xlsx.utils.sheet_add_json(sheet, people);
-        xlsx.writeFile(wb, this.filePath); 
+        xlsx.utils.sheet_add_json(sheet, entities);
+        xlsx.writeFile(wb, this.filePath)
     }
 
     public async get() {
         const wb = await this.openWB();
         const sheet = wb.Sheets[wb.SheetNames[0]];
 
-        const entity = xlsx.utils.sheet_to_json<T>(sheet)
-        return entity;
+        const entities = xlsx.utils.sheet_to_json<T>(sheet)
+        return entities;
     }
 
     public async where(queryObject: QueryObject<T>) {
         const wb = await this.openWB();
         const sheet = wb.Sheets[wb.SheetNames[0]];
 
-        const entity = xlsx.utils.sheet_to_json<T>(sheet)
-        return entity.filter(queryObject.where)
+        const entities = xlsx.utils.sheet_to_json<T>(sheet)
+        return entities.filter(queryObject.where)
     }
 
     public async find(queryObject: QueryObject<T>) {
         const wb = await this.openWB();
         const sheet = wb.Sheets[wb.SheetNames[0]];
 
-        const entity = xlsx.utils.sheet_to_json<T>(sheet)
-        return entity.find(queryObject.where)
+        const entities = xlsx.utils.sheet_to_json<T>(sheet)
+        return entities.find(queryObject.where)
     }
 }
