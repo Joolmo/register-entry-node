@@ -13,9 +13,16 @@ export class PersonService implements IPersonService{
         this.personDao = personDao;
     }
     
-    GetPersonList(): Promise<ResponsePersonListDto | ResponseErrorDto> 
+    async GetPersonList(): Promise<ResponsePersonListDto | ResponseErrorDto> 
     {
-        throw new Error("Method not implemented.");
+        let peopleList = await this.personDao.get();
+
+        let peopleListDto: ResponsePersonListDto = peopleList.map((person) => ({
+            Name: person.Name,
+            Surname: person.Surname
+        }) );
+
+        return peopleListDto;
     }
 
     async LogPerson(requestLoginPersonDto: RequestLoginPersonDto): Promise<ResponseSuccessfulDto | ResponseErrorDto> 
