@@ -1,3 +1,3 @@
-export type ErrorDto = {
-    Message: string;
+export type ResponseErrorDto = {
+    ErrorMessage: string;
 }

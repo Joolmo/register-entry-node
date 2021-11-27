@@ -1,7 +1,7 @@
-import { RequestRegisterPersonDto, RequestLoginPersonDto } from "../Dto";
+import { RequestRegisterPersonDto, RequestLoginPersonDto, ResponsePersonListDto, ResponseSuccessfulDto, ResponseErrorDto} from "../Dto";
 
 export interface IPersonService {   
-    RegisterPerson(requestRegisterPersonDto: RequestRegisterPersonDto): Promise<void>;
-    GetPersonList(): Promise<void>;
-    LogPerson(requestLoginPersonDto: RequestLoginPersonDto): Promise<void>;
+    GetPersonList(): Promise<ResponsePersonListDto | ResponseErrorDto>;
+    LogPerson(requestLoginPersonDto: RequestLoginPersonDto): Promise<ResponseSuccessfulDto | ResponseErrorDto>;
+    RegisterPerson(requestRegisterPersonDto: RequestRegisterPersonDto): Promise<ResponseSuccessfulDto | ResponseErrorDto>;
 }

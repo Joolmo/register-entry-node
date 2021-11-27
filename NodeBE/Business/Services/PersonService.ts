@@ -1,5 +1,6 @@
 import { IEntryDao } from "../../Data/DaoInterfaces/IEntryDao";
 import { IPersonService } from "./IPersonService";
+import { RequestRegisterPersonDto, RequestLoginPersonDto, ResponsePersonListDto, ResponseSuccessfulDto, ResponseErrorDto } from "../Dto";
 
 export class PersonService implements IPersonService{
     private entryDao: IEntryDao
@@ -8,13 +9,26 @@ export class PersonService implements IPersonService{
         this.entryDao = entryDao
     }
     
-    RegisterPerson(): Promise<void> {
+    GetPersonList(): Promise<ResponsePersonListDto | ResponseErrorDto> 
+    {
         throw new Error("Method not implemented.");
     }
-    GetPersonList(): Promise<void> {
+
+    LogPerson(requestLoginPersonDto: RequestLoginPersonDto): Promise<ResponseSuccessfulDto | ResponseErrorDto> 
+    {
         throw new Error("Method not implemented.");
     }
-    LogPerson(): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async RegisterPerson(requestRegisterPersonDto: RequestRegisterPersonDto): Promise<ResponseSuccessfulDto | ResponseErrorDto> 
+    {
+
+        if(await this.entryDao.find({where: (entry) => requestRegisterPersonDto.Id == entry.Id}))
+        {
+            return {
+                ErrorMessage: "The Id you want to register already exist."
+            };
+        }
+
+        
     }
 }
