@@ -1,5 +1,5 @@
-import { BaseXlsxDao } from "../Data/Daos/BaseXlsxDao"
-import xlsx = require('xlsx')
+import { BaseXlsxDao } from "../Data/Daos/BaseXlsxDao";
+import xlsx = require('xlsx');
 import assert = require('assert');
 import { promises as fs } from "fs";
 

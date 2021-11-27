@@ -1,16 +1,16 @@
 { 
-    "compilerOptions": {
-      "target": "esNext",
-      "module": "commonjs",
-      "types": ["mocha"],
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "removeComments": false,
-      "noImplicitAny": false,
-      "suppressImplicitAnyIndexErrors": true,
-      "outDir": "dist"
-    },
-    "exclude": [ "node_modules" ] 
-  }
+  "compilerOptions": {
+    "target": "esNext",
+    "module": "commonjs",
+    "types": ["mocha"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "dist"
+  },
+  "exclude": [ "node_modules" ] 
+}

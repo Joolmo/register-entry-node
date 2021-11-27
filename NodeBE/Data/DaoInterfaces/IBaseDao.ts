@@ -5,6 +5,6 @@ export type QueryObject<T> = {
 export interface IBaseDao<T extends object> {
     create(entity: T): Promise<void>;
     get(): Promise<T[]>;
-    where(queryObject): Promise<T[]>;
-    find(queryObject): Promise<T>
+    where(query: QueryObject<T>): Promise<T[]>;
+    find(query: QueryObject<T>): Promise<T>
 }
