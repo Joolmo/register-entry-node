@@ -1,7 +1,5 @@
 /* Custom, simple, DI inyection for IoC */
-
 import { AnyObject , StoreTypes, Dependencies } from './IoCTypes'
-
 
 export class Container<ContainerDef extends AnyObject> {
     // Private store of dependencies configurations
