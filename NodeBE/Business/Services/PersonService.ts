@@ -69,6 +69,8 @@ export class PersonService implements IPersonService{
 
         try
         {
+
+            console.log("ESTOY AQUÍ");
             await this.personDao.create({
                 Id: requestRegisterPersonDto.Id,
                 Name: requestRegisterPersonDto.Name,

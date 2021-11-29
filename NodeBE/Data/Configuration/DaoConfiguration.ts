@@ -1,5 +1,5 @@
 export type DaoConfiguration = {
-    entitiesFile?: string,
-    personsFile?: string,
+    entriesFile?: string,
+    peopleFile?: string,
     basePath?: string
 }
