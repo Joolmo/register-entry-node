@@ -27,7 +27,7 @@ const setUpDependencies = async (container: Container<InjectionsList>) => {
     container.Register("IPersonService", c => new PersonService(c.IEntryDao, c.IPersonDao)).asTransient();
     container.Register("IEntryDao", c => new EntryXlsxDao(c.DaoConfiguration)).asTransient();
     container.Register("IPersonDao", c => new PersonXlsxDao(c.DaoConfiguration)).asTransient();
-    container.Register("DaoConfiguration", _ => ({basePath: "", personsFile: "", entitiesFile: ""})).asConfiguration();
+    container.Register("DaoConfiguration", _ => ({basePath: ".", peopleFile: "people.xlsx", entriesFile: "entries.xlsx"})).asConfiguration();
 }
 
 const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
