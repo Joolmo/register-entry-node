@@ -1,21 +1,18 @@
 import { ipcMain } from "electron";
-import { Endpoint } from "./Decorators";
+import { IPCMainHandler } from "./Decorators";
 import { Container } from "./IoC";
 import { AnyObject } from "./IoCTypes";
 
-export class ContainerWithHandlers<T extends AnyObject> extends Container<T> {
-    public RegisterHandler<Key extends keyof T>(name: Key, factoryFunc: (dependencies: Partial<T>) => T[Key]) {
+export class ContainerWithHandlers<T extends AnyObject = AnyObject> extends Container<T>{
+    public RegisterHandler<Key extends keyof T, Value extends T[Key] & IPCMainHandler>(name: Key, factoryFunc: (dependencies: Partial<T>) => Value) {
         this.Register(name, factoryFunc).asTransient()
 
-        const handlerInstance = this.dependencies[name]
-        const endpoints = handlerInstance.endpoints as Endpoint[]
-        const basePath = handlerInstance.basePath as string
+        const handlerInstance = this.dependencies[name] as IPCMainHandler
 
-        endpoints.forEach(endPoint => {
-            ipcMain.handle(`${basePath}/${endPoint.path}`, (_, ...args) => {
+        handlerInstance.endpoints.forEach(endPoint => {
+            ipcMain.handle(endPoint.path, (_, ...args) => {
                 const handler = this.dependencies[name]
-                console.log(args);
-                return handler[endPoint.methodName](args[0])
+                return handler[endPoint.methodName](...args)
             })
         })
     }

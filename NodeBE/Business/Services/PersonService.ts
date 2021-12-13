@@ -20,7 +20,7 @@ export class PersonService implements IPersonService{
         let peopleListDto: ResponsePersonListDto = peopleList.map((person) => ({
             Name: person.Name,
             Surname: person.Surname
-        }) );
+        }));
 
         return peopleListDto;
     }
@@ -37,8 +37,7 @@ export class PersonService implements IPersonService{
             return { ErrorMessage: "The number of masks could not be less than zero" };
         }
 
-        let personToLog = await this.personDao.
-                            find({where: (person) => person.Id === requestLoginPersonDto.Id});
+        let personToLog = await this.personDao.find({where: (person) => person.Id === requestLoginPersonDto.Id});
 
         try
         {
@@ -53,7 +52,9 @@ export class PersonService implements IPersonService{
             
             return { SuccesfulMessage: "Logged successfully" };
 
-        } catch (error) {
+        } 
+        catch (error)
+        {
             console.log(error);
             return { ErrorMessage: "Unexpected error" };
         }
@@ -69,8 +70,6 @@ export class PersonService implements IPersonService{
 
         try
         {
-
-            console.log("ESTOY AQUÍ");
             await this.personDao.create({
                 Id: requestRegisterPersonDto.Id,
                 Name: requestRegisterPersonDto.Name,
@@ -80,8 +79,9 @@ export class PersonService implements IPersonService{
     
             return { SuccesfulMessage: "Registered successfully" };
 
-        }catch(error) {
-
+        }
+        catch(error)
+        {
             console.log(error);
             return { ErrorMessage: "Unexepected error" };
         }

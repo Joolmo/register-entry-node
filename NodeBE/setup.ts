@@ -14,20 +14,20 @@ type InjectionsList = {
     IEntryDao: IEntryDao,
     IPersonDao: IPersonDao,
     DaoConfiguration: DaoConfiguration,
-    IPersonService: IPersonService
+    IPersonService: IPersonService,
     PersonHandler: PersonHandler
 }
 
-const setUpConfiguration = () => {
-    const filePath = process.env.CONFIGURATION_FILE;
-    return Fs.readFile(filePath).then(rawFile => JSON.parse(rawFile.toString()));
+const setUpConfiguration = (container: Container<InjectionsList>) => {
+    // const filePath = process.env.CONFIGURATION_FILE;
+    // const config = Fs.readFile(filePath).then(rawFile => JSON.parse(rawFile.toString()));
+    container.Register("DaoConfiguration", _ => ({basePath: ".", entriesFile: "entries.xlsx", peopleFile: "people.xlsx"})).asConfiguration()
 }
 
-const setUpDependencies = async (container: Container<InjectionsList>) => {
+const setUpDependencies = (container: Container<InjectionsList>) => {
     container.Register("IPersonService", c => new PersonService(c.IEntryDao, c.IPersonDao)).asTransient();
     container.Register("IEntryDao", c => new EntryXlsxDao(c.DaoConfiguration)).asTransient();
     container.Register("IPersonDao", c => new PersonXlsxDao(c.DaoConfiguration)).asTransient();
-    container.Register("DaoConfiguration", _ => ({basePath: ".", peopleFile: "people.xlsx", entriesFile: "entries.xlsx"})).asConfiguration();
 }
 
 const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
@@ -35,7 +35,8 @@ const setUpHandlers = (container: ContainerWithHandlers<InjectionsList>) => {
 }
 
 const container = new ContainerWithHandlers<InjectionsList>();
-export const setUpNodeBe = async () => {
-    await setUpDependencies(container);
+export const setUpNodeBe = () => {
+    setUpConfiguration(container)
+    setUpDependencies(container);
     setUpHandlers(container)
 } 
