@@ -1,21 +1,22 @@
 import { useState } from "react";
+import { usePeople } from './CustomHooks/usePeople'
 
 function App() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [employee, setEmployee] = useState(false);
+  const { registerPerson } = usePeople();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     // alert(`Id: ${id} \n Name: ${name} \n Surname: ${surname} \n Employee: ${employee}`);
-    let hola = await window.api.send("person/register", {
+    registerPerson({
       Id: id,
       Name: name,
       Surname: surname,
       Employee: employee
     });
-    console.log(hola);
   }
 
   return (

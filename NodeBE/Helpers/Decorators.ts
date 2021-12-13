@@ -3,7 +3,7 @@ export type Endpoint = { methodName: string, path: string }
 export const Handler: (basePath: string) => ClassDecorator = (basePath) => {
     return (target: Function) => { 
         const endpoints = target.prototype._endpoints as Endpoint[] 
-        target.prototype.endpoints = endpoints.map(endpoint => ({
+        target.prototype._endpoints = endpoints.map(endpoint => ({
             methodName: endpoint.methodName,
             path: `${basePath}/${endpoint.path}`
         }))
